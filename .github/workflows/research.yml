@@ -2,7 +2,7 @@ name: AI Safety Research Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 9 * * 6'
 
 jobs:
   build:
@@ -31,22 +31,67 @@ jobs:
           os.makedirs('reports', exist_ok=True)
 
           # Fetch latest cs.AI and cs.LG papers as XML
-          url = "http://export.arxiv.org/api/query"
-          params = {
+          import requests
+          import os
+          import json
+          from datetime import datetime, timedelta
+          
+          os.makedirs('reports', exist_ok=True)
+          week_ago = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
+          
+          sources = {}
+          
+          # 1. arXiv — already working
+          arxiv_params = {
               "search_query": "cat:cs.AI OR cat:cs.LG",
-              "start": 0,
-              "max_results": 30,
-              "sortBy": "submittedDate",
-              "sortOrder": "descending"
+              "start": 0, "max_results": 50,
+              "sortBy": "submittedDate", "sortOrder": "descending"
           }
-          response = requests.get(url, params=params)
-          response.raise_for_status()
-
-          with open('reports/arxiv_raw.xml', 'w', encoding='utf-8') as f:
-              f.write(response.text)
-
-          print(f"Fetched arXiv XML — {len(response.text)} chars")
-          EOF
+          r = requests.get("http://export.arxiv.org/api/query", params=arxiv_params)
+          sources['arxiv'] = r.text
+          
+          # 2. Anthropic RSS
+          r = requests.get("https://www.anthropic.com/rss.xml", timeout=10)
+          sources['anthropic'] = r.text
+          
+          # 3. Alignment Forum (has a public GraphQL API)
+          af_query = """
+          {
+            posts(input: {terms: {view: "new", limit: 20, after: "%s"}}) {
+              results { title url postedAt score excerpt }
+            }
+          }
+          """ % week_ago
+          r = requests.post(
+              "https://www.alignmentforum.org/graphql",
+              json={"query": af_query},
+              headers={"Content-Type": "application/json"},
+              timeout=15
+          )
+          sources['alignment_forum'] = r.text
+          
+          # 4. LessWrong (same API structure as AF)
+          r = requests.post(
+              "https://lesswrong.com/graphql",
+              json={"query": af_query},
+              headers={"Content-Type": "application/json"},
+              timeout=15
+          )
+          sources['lesswrong'] = r.text
+          
+          # 5. GovAI blog RSS
+          r = requests.get("https://www.governance.ai/feed", timeout=10)
+          sources['govai'] = r.text
+          
+          # 6. Future of Life Institute
+          r = requests.get("https://futureoflife.org/feed/", timeout=10)
+          sources['fli'] = r.text
+          
+          # Save all sources to a single file
+          with open('reports/weekly_raw.json', 'w') as f:
+              json.dump(sources, f)
+          
+          print(f"Fetched {len(sources)} sources")
 
       - name: Generate Daily Briefing
         run: |
