@@ -33,6 +33,8 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: "--model claude-haiku-4-5"
+          show_full_output: true
+          allowed_tools: "computer,bash,editor,write_file,str_replace_editor,str_replace_based_edit_tool"
           prompt: |
             Read CLAUDE.md for instructions.
             Read reports/date.txt to get today's date.
