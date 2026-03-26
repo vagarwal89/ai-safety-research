@@ -25,24 +25,49 @@ jobs:
 
       - name: Generate Research Briefing
         run: |
-          ARXIV_CONTENT=$(cat /tmp/arxiv_raw.xml)
-          RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
-            -H "x-api-key: ${{ secrets.ANTHROPIC_API_KEY }}" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "content-type: application/json" \
-            -d "{
-              \"model\": \"claude-haiku-4-5-20251001\",
-              \"max_tokens\": 4096,
-              \"messages\": [{
-                \"role\": \"user\",
-                \"content\": \"Today is ${{ env.TODAY }}. Here are today's arXiv papers in XML format:\n\n$ARXIV_CONTENT\n\nFilter and summarize papers relevant to AI safety, interpretability, and governance. For each relevant paper provide: Title & Link, The So What (2 sentences on why this matters), and Technical Core (brief abstract summary). Format as markdown.\"
+          python3 << 'EOF'
+          import json
+          import urllib.request
+          import os
+
+          with open('/tmp/arxiv_raw.xml', 'r') as f:
+              arxiv_content = f.read()
+
+          date = os.environ['TODAY']
+
+          payload = {
+              "model": "claude-haiku-4-5-20251001",
+              "max_tokens": 4096,
+              "messages": [{
+                  "role": "user",
+                  "content": f"Today is {date}. Here are today's arXiv papers in XML format:\n\n{arxiv_content}\n\nFilter and summarize papers relevant to AI safety, interpretability, and governance. For each relevant paper provide:\n- Title & Link\n- The So What: 2 sentences on why this matters for safety/governance\n- Technical Core: brief abstract summary\n\nFormat as markdown. If no relevant papers found, write 'No critical updates today.'"
               }]
-            }")
-          echo "$RESPONSE" | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          print(data['content'][0]['text'])
-          " > reports/daily-briefing-${{ env.TODAY }}.md
+          }
+
+          req = urllib.request.Request(
+              'https://api.anthropic.com/v1/messages',
+              data=json.dumps(payload).encode('utf-8'),
+              headers={
+                  'x-api-key': os.environ['ANTHROPIC_API_KEY'],
+                  'anthropic-version': '2023-06-01',
+                  'content-type': 'application/json'
+              }
+          )
+
+          with urllib.request.urlopen(req) as response:
+              data = json.loads(response.read())
+
+          output = data['content'][0]['text']
+
+          with open(f"reports/daily-briefing-{date}.md", 'w') as f:
+              f.write(f"# Daily AI Safety Research Briefing\n**Date:** {date}\n\n")
+              f.write(output)
+
+          print("Briefing written successfully")
+          EOF
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TODAY: ${{ env.TODAY }}
 
       - name: Automatic Save
         run: |
