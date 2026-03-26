@@ -19,7 +19,14 @@ jobs:
       - name: Prepare Workspace
         run: |
           mkdir -p reports
-          echo "Today's date is $(date +'%Y-%m-%d')" > reports/date.txt
+          DATE=$(date +'%Y-%m-%d')
+          echo $DATE > reports/date.txt
+          touch reports/daily-briefing-$DATE.md
+          echo "TARGET_FILE=reports/daily-briefing-$DATE.md" >> $GITHUB_ENV
+
+      - name: Fetch arXiv Papers
+        run: |
+          curl "https://export.arxiv.org/api/query?search_query=cat:cs.AI+AND+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=20" > reports/arxiv_raw.xml
 
       - name: Run Claude Research
         uses: anthropics/claude-code-action@v1
@@ -29,12 +36,10 @@ jobs:
           prompt: |
             Read CLAUDE.md for instructions.
             Read reports/date.txt to get today's date.
-            You do not have internet access, so you cannot query arXiv directly.
-            Instead, write a research briefing based on your training knowledge about
-            recent developments in AI safety, interpretability, and governance from
-            the researchers and organizations listed in CLAUDE.md.
-            Save the output to 'reports/daily-briefing-YYYY-MM-DD.md' replacing
-            YYYY-MM-DD with today's actual date from reports/date.txt.
+            Read reports/arxiv_raw.xml which contains today's latest arXiv papers in XML format.
+            Filter and summarize the papers per CLAUDE.md instructions.
+            Write your output into this exact file path: ${{ env.TARGET_FILE }}
+            That file already exists — just write the research content into it.
             Do not leave the file empty under any circumstances.
 
       - name: Automatic Save
