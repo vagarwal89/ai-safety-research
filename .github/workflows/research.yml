@@ -3,11 +3,9 @@ on:
   schedule:
     - cron: '0 15 * * *'
   workflow_dispatch:
-
 permissions:
   contents: write
   id-token: write
-
 jobs:
   research:
     runs-on: ubuntu-latest
@@ -30,10 +28,13 @@ jobs:
           claude_args: "--model claude-haiku-4-5"
           prompt: "Read CLAUDE.md. Write the research summary directly into 'reports/latest_research.md'."
 
+      - name: Configure Git Auth
+        run: |
+          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
       - name: Automatic Save
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: main
           commit_message: "Add daily research report"
           file_pattern: 'reports/*.md'
-          token: ${{ secrets.GITHUB_TOKEN }}
