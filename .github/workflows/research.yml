@@ -1,79 +1,9 @@
-name: Daily AI Research Bot
-on:
-  schedule:
-    - cron: '0 15 * * *'
-  workflow_dispatch:
-permissions:
-  contents: write
-  id-token: write
-jobs:
-  research:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
-
-      - name: Fetch arXiv Papers
-        run: |
-          mkdir -p reports
-          DATE=$(date +'%Y-%m-%d')
-          echo "TODAY=$DATE" >> $GITHUB_ENV
-          curl "https://export.arxiv.org/api/query?search_query=cat:cs.AI+AND+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=20" > /tmp/arxiv_raw.xml
-
-      - name: Generate Research Briefing
-        run: |
-          python3 << 'EOF'
-          import json
-          import urllib.request
-          import os
-
-          with open('/tmp/arxiv_raw.xml', 'r') as f:
-              arxiv_content = f.read()
-
-          date = os.environ['TODAY']
-
-          payload = {
-              "model": "claude-haiku-4-5-20251001",
-              "max_tokens": 4096,
-              "messages": [{
-                  "role": "user",
-                  "content": f"Today is {date}. Here are today's arXiv papers in XML format:\n\n{arxiv_content}\n\nFilter and summarize papers relevant to AI safety, interpretability, and governance. For each relevant paper provide:\n- Title & Link\n- The So What: 2 sentences on why this matters for safety/governance\n- Technical Core: brief abstract summary\n\nFormat as markdown. If no relevant papers found, write 'No critical updates today.'"
-              }]
-          }
-
-          req = urllib.request.Request(
-              'https://api.anthropic.com/v1/messages',
-              data=json.dumps(payload).encode('utf-8'),
-              headers={
-                  'x-api-key': os.environ['ANTHROPIC_API_KEY'],
-                  'anthropic-version': '2023-06-01',
-                  'content-type': 'application/json'
-              }
-          )
-
-          with urllib.request.urlopen(req) as response:
-              data = json.loads(response.read())
-
-          output = data['content'][0]['text']
-
-          with open(f"reports/daily-briefing-{date}.md", 'w') as f:
-              f.write(f"# Daily AI Safety Research Briefing\n**Date:** {date}\n\n")
-              f.write(output)
-
-          print("Briefing written successfully")
-          EOF
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          TODAY: ${{ env.TODAY }}
-
-      - name: Send Email Digest
+- name: Send Email Digest
         run: |
           python3 << 'EOF'
           import smtplib
           import os
+          import re
           from email.mime.multipart import MIMEMultipart
           from email.mime.text import MIMEText
 
@@ -84,20 +14,53 @@ jobs:
           with open(f"reports/daily-briefing-{date}.md", 'r') as f:
               content = f.read()
 
-          # Convert markdown to simple HTML
-          html = content \
-              .replace('# ', '<h1>').replace('\n', '<br>\n') \
-              .replace('### ', '<h3>').replace('## ', '<h2>') \
-              .replace('**', '<b>').replace('</b><b>', '') \
-              .replace('---', '<hr>')
+          # Convert markdown to clean HTML
+          html_lines = []
+          for line in content.split('\n'):
+              if line.startswith('# '):
+                  html_lines.append(f'<h2 style="color:#1a1a1a;font-size:20px;margin-bottom:4px;">{line[2:]}</h2>')
+              elif line.startswith('## '):
+                  html_lines.append(f'<h3 style="color:#333;font-size:16px;margin-bottom:4px;">{line[3:]}</h3>')
+              elif line.startswith('### '):
+                  html_lines.append(f'<h4 style="color:#444;font-size:14px;margin-bottom:2px;">{line[4:]}</h4>')
+              elif line.startswith('---'):
+                  html_lines.append('<hr style="border:none;border-top:1px solid #eee;margin:16px 0;">')
+              elif line.startswith('- **'):
+                  line = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', line)
+                  html_lines.append(f'<p style="margin:4px 0;font-size:13px;color:#333;">{line[2:]}</p>')
+              elif line.strip() == '':
+                  html_lines.append('<br>')
+              else:
+                  line = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', line)
+                  line = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2" style="color:#0066cc;">\1</a>', line)
+                  html_lines.append(f'<p style="margin:4px 0;font-size:13px;color:#333;line-height:1.5;">{line}</p>')
+
+          html_body = '\n'.join(html_lines)
+
+          html = f"""
+          <html>
+          <body style="font-family:Arial,sans-serif;max-width:680px;margin:0 auto;padding:24px;background:#f9f9f9;">
+            <div style="background:#fff;border-radius:8px;padding:24px;border:1px solid #e0e0e0;">
+              <div style="border-bottom:2px solid #0066cc;padding-bottom:12px;margin-bottom:20px;">
+                <p style="font-size:11px;color:#888;margin:0;">AI SAFETY RESEARCH DIGEST</p>
+                <p style="font-size:13px;color:#555;margin:4px 0 0 0;">{date}</p>
+              </div>
+              {html_body}
+              <div style="margin-top:24px;padding-top:12px;border-top:1px solid #eee;">
+                <p style="font-size:11px;color:#aaa;margin:0;">Generated from arXiv cs.AI + cs.LG · vagarwal89/ai-safety-research</p>
+              </div>
+            </div>
+          </body>
+          </html>
+          """
 
           msg = MIMEMultipart('alternative')
-          msg['Subject'] = f"AI Safety Research Digest - {date}"
+          msg['Subject'] = f"AI Safety Digest — {date}"
           msg['From'] = gmail
           msg['To'] = gmail
 
           msg.attach(MIMEText(content, 'plain'))
-          msg.attach(MIMEText(f"<html><body>{html}</body></html>", 'html'))
+          msg.attach(MIMEText(html, 'html'))
 
           with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
               server.login(gmail, password)
@@ -109,12 +72,3 @@ jobs:
           TODAY: ${{ env.TODAY }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-
-      - name: Automatic Save
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/vagarwal89/ai-safety-research.git
-          git add reports/
-          git diff --staged --quiet || git commit -m "Add daily research report $(date +'%Y-%m-%d')"
-          git push origin main
