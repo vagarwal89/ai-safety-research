@@ -19,9 +19,9 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # 1. Use the cheaper model. 2. Stop 'Extended Thinking' to save money.
-          claude_args: "--model claude-3-5-haiku"
-          prompt: "Execute Daily Tasks in CLAUDE.md. Write the report to reports/daily-$(date +%F).md. Be very brief."
+          # Use the latest budget model for 2026 to save money
+          claude_args: "--model claude-haiku-4-5"
+          prompt: "Briefly execute the research tasks in CLAUDE.md. Save the summary to reports/."
 
       - name: Automatic Save
         uses: stefanzweifel/git-auto-commit-action@v5
