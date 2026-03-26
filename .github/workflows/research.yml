@@ -16,34 +16,33 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Prepare Workspace
+      - name: Fetch arXiv Papers
         run: |
           mkdir -p reports
           DATE=$(date +'%Y-%m-%d')
-          echo $DATE > reports/date.txt
-          touch reports/daily-briefing-$DATE.md
-          echo "TARGET_FILE=reports/daily-briefing-$DATE.md" >> $GITHUB_ENV
+          echo "TODAY=$DATE" >> $GITHUB_ENV
+          curl "https://export.arxiv.org/api/query?search_query=cat:cs.AI+AND+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=20" > /tmp/arxiv_raw.xml
 
-      - name: Fetch arXiv Papers
+      - name: Generate Research Briefing
         run: |
-          curl "https://export.arxiv.org/api/query?search_query=cat:cs.AI+AND+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=20" > reports/arxiv_raw.xml
-
-      - name: Run Claude Research
-        uses: anthropics/claude-code-action@v1
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          claude_args: "--model claude-haiku-4-5"
-          show_full_output: true
-          additional_permissions: |
-            - Write to reports/
-          prompt: |
-            Read CLAUDE.md for instructions.
-            Read reports/date.txt to get today's date.
-            Read reports/arxiv_raw.xml which contains today's latest arXiv papers in XML format.
-            Filter and summarize the papers per CLAUDE.md instructions.
-            Write your output into this exact file path: ${{ env.TARGET_FILE }}
-            That file already exists — just write the research content into it.
-            Do not leave the file empty under any circumstances.
+          ARXIV_CONTENT=$(cat /tmp/arxiv_raw.xml)
+          RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+            -H "x-api-key: ${{ secrets.ANTHROPIC_API_KEY }}" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "content-type: application/json" \
+            -d "{
+              \"model\": \"claude-haiku-4-5-20251001\",
+              \"max_tokens\": 4096,
+              \"messages\": [{
+                \"role\": \"user\",
+                \"content\": \"Today is ${{ env.TODAY }}. Here are today's arXiv papers in XML format:\n\n$ARXIV_CONTENT\n\nFilter and summarize papers relevant to AI safety, interpretability, and governance. For each relevant paper provide: Title & Link, The So What (2 sentences on why this matters), and Technical Core (brief abstract summary). Format as markdown.\"
+              }]
+            }")
+          echo "$RESPONSE" | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          print(data['content'][0]['text'])
+          " > reports/daily-briefing-${{ env.TODAY }}.md
 
       - name: Automatic Save
         run: |
