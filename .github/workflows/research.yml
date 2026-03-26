@@ -15,15 +15,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Create Reports Folder
-        run: mkdir -p reports  # <--- THIS FORCES THE FOLDER TO EXIST
+      - name: Prepare Workspace
+        run: |
+          mkdir -p reports
+          touch reports/latest_research.md
 
       - name: Run Claude Research
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: "--model claude-haiku-4-5"
-          prompt: "Summarize research from CLAUDE.md. Save as reports/report-$(date +%F).md"
+          # We tell Claude exactly which file to overwrite
+          prompt: "Read CLAUDE.md. Conduct the research. Write the FINAL output directly into the file 'reports/latest_research.md'. Do not just talk, you must write to the file."
 
       - name: Automatic Save
         uses: stefanzweifel/git-auto-commit-action@v5
