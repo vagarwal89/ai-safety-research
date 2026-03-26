@@ -28,13 +28,11 @@ jobs:
           claude_args: "--model claude-haiku-4-5"
           prompt: "Read CLAUDE.md. Write the research summary directly into 'reports/latest_research.md'."
 
-      - name: Configure Git Auth
-        run: |
-          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
-
       - name: Automatic Save
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: main
-          commit_message: "Add daily research report"
-          file_pattern: 'reports/*.md'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/vagarwal89/ai-safety-research.git
+          git add reports/*.md
+          git diff --staged --quiet || git commit -m "Add daily research report"
+          git push origin main
