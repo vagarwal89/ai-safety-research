@@ -1,69 +1,81 @@
-# Daily AI Safety Research Briefing
+# AI Safety & Governance Daily Briefing
+
 **Date:** 2026-03-26
 
-# AI Safety, Interpretability & Governance Updates
+---
 
-## 1. Retrieval Improvements Do Not Guarantee Better Answers: A Study of RAG for AI Policy QA
-**Link:** https://arxiv.org/abs/2603.24580v1
+## Summary
 
-**The So What:** This work reveals a critical failure mode in RAG systems for policy analysis—better retrieval doesn't reliably improve answer quality and can paradoxically increase confident hallucinations. This is directly relevant to deploying AI systems for high-stakes governance decisions where false confidence poses serious risks.
-
-**Technical Core:** The authors study RAG applied to AI policy documents using ColBERT-based retrieval + DPO-aligned generation. They show domain-specific fine-tuning improves retrieval metrics but not end-to-end QA performance, highlighting a component-level vs. system-level reliability gap that affects policy-focused systems.
+No papers from the key researchers (Jan Leike, Amanda Askell, Chris Olah, Anca Dragan, Pushmeet Kohli, Beth Barnes) or key organizations (Anthropic, DeepMind Safety, GovAI, METR) were identified in today's arXiv feed. However, several papers with relevance to AI safety, governance, and interpretability themes were found.
 
 ---
 
-## 2. Claudini: Autoresearch Discovers State-of-the-Art Adversarial Attack Algorithms for LLMs
-**Link:** https://arxiv.org/abs/2603.24511v1
+## Relevant Papers
 
-**The So What:** This demonstrates that LLM agents can autonomously discover adversarial attacks achieving 40% success rates on safety-critical queries—significantly outperforming manual methods. It underscores the need for robust safety research automation and red-teaming but also reveals how quickly attack sophistication can scale via LLM-guided search.
+### 1. The Stochastic Gap: A Markovian Framework for Pre-Deployment Reliability and Oversight-Cost Auditing in Agentic Artificial Intelligence
 
-**Technical Core:** An autoresearch pipeline uses Claude Code to iteratively improve GCG-style white-box attacks through autonomous experimentation. Discovered algorithms transfer to held-out models (100% ASR on Meta-SecAlign-70B) and are more effective than 30+ existing methods, suggesting safety baselines may erode quickly.
+**Link:** [arXiv:2603.24582](https://arxiv.org/abs/2603.24582)
 
----
+**The "So What?":** This paper provides a formal framework for auditing agentic AI systems before deployment, directly addressing oversight costs and reliability—core concerns for AI governance. The ability to quantify when human-in-the-loop escalation is needed has immediate practical implications for safe deployment of autonomous AI agents in enterprise settings.
 
-## 3. No Single Metric Tells the Whole Story: A Multi-Dimensional Evaluation Framework for Uncertainty Attributions
-**Link:** https://arxiv.org/abs/2603.24524v1
+**Technical Core:** The authors develop a measure-theoretic Markov framework for agentic AI workflows, introducing metrics for state blind-spot mass, entropy-based human escalation gates, and expected oversight cost. Validated on a large purchase-to-pay log (251K cases), they find that state-action blind mass increases substantially when operational context is enriched, demonstrating that apparent state-level support can mask decision-level uncertainty.
 
-**The So What:** Proposes a systematic framework for evaluating uncertainty attribution methods in XAI, addressing a critical gap in how we measure explainability quality. This matters for safety because unreliable uncertainty estimates undermine trust calibration and deferral mechanisms in high-stakes AI systems.
-
-**Technical Core:** Aligns uncertainty attribution evaluation with the Co-12 XAI framework (correctness, consistency, continuity, compactness) plus a new "conveyance" property specific to uncertainty. Tests 8 metrics across UQ and attribution method combinations, finding low inter-metric agreement suggests no single metric suffices.
+**Relationship:** No direct affiliation with listed key researchers or organizations.
 
 ---
 
-## 4. The Alignment Tax: Response Homogenization in Aligned LLMs and Its Implications for Uncertainty Estimation
-**Link:** https://arxiv.org/abs/2603.24124v1
+### 2. Retrieval Improvements Do Not Guarantee Better Answers: A Study of RAG for AI Policy QA
 
-**The So What:** Reveals that RLHF alignment causes response homogenization (40-79% semantic collapse on TruthfulQA), breaking uncertainty quantification methods. This hidden cost of alignment has direct implications for safety: aligned models become harder to assess for confidence calibration, a key requirement for safe deployment.
+**Link:** [arXiv:2603.24580](https://arxiv.org/abs/2603.24580)
 
-**Technical Core:** Through base-vs-instruct and training-stage ablations, shows DPO causes 4% single-cluster collapse rates vs. 0% in base models. Sampling-based uncertainty methods fail entirely (AUROC=0.5) on affected questions while token entropy retains signal, suggesting alignment creates systematic uncertainty blindspots.
+**The "So What?":** This work directly addresses AI governance tooling by evaluating RAG systems on AI policy documents. The finding that better retrieval can paradoxically lead to more confident hallucinations is a critical insight for anyone building AI-assisted policy analysis systems.
 
----
+**Technical Core:** The authors study RAG performance on the AGORA corpus (947 AI policy documents) using a fine-tuned ColBERT retriever and DPO-aligned generator. They find that domain-specific fine-tuning improves retrieval metrics but does not consistently improve QA performance, and can increase hallucination confidence when relevant documents are absent.
 
-## 5. Multi-Agent Reasoning with Consistency Verification Improves Uncertainty Calibration in Medical MCQA
-**Link:** https://arxiv.org/abs/2603.24481v1
-
-**The So What:** Demonstrates that multi-agent consistency verification can reduce calibration error (ECE) by 49-74% in medical QA, a safety-critical domain. This directly addresses the need for reliable confidence estimates in clinical AI—a prerequisite for responsible deferral and human oversight.
-
-**Technical Core:** Uses four specialist agents with two-phase self-verification (measuring internal consistency) and S-Score weighted fusion. On MedQA-250, achieves ECE=0.091 (74% improvement) while maintaining 59.2% accuracy, showing consistency-based verification is the primary calibration driver.
+**Relationship:** No direct affiliation with listed key researchers or organizations.
 
 ---
 
-## 6. Towards Effective Experiential Learning: Dual Guidance for Utilization and Internalization
-**Link:** https://arxiv.org/abs/2603.24093v1
+### 3. Claudini: Autoresearch Discovers State-of-the-Art Adversarial Attack Algorithms for LLMs
 
-**The So What:** Proposes dual guidance for RL training of LLMs that better separates exploration from internal knowledge representation. This is relevant to AI governance as it addresses how to structure RL training to build more interpretable and controllable reasoning processes.
+**Link:** [arXiv:2603.24511](https://arxiv.org/abs/2603.24511)
 
-**Technical Core:** Introduces DGO (Dual Guidance Optimization) which maintains an experience bank and performs exploration under joint guidance of external trajectories and internal knowledge, then refines both components in a closed loop. Results show consistent improvements on reasoning tasks versus baselines.
+**The "So What?":** This paper demonstrates that LLM agents can autonomously discover novel adversarial attacks that outperform all existing methods—a significant finding for AI safety red-teaming. It suggests both promise (automated safety research) and risk (automated attack discovery) for the field.
 
----
+**Technical Core:** Using an autoresearch pipeline powered by Claude Code, the authors show that agentic iteration starting from GCG attacks produces new white-box jailbreaking algorithms achieving up to 40% ASR on CBRN queries against safety-guarded models, and 100% ASR against Meta-SecAlign-70B on transfer attacks—far exceeding baselines.
 
-## 7. Evidence of an Emergent "Self" in Continual Robot Learning
-**Link:** https://arxiv.org/abs/2603.24350v1
-
-**The So What:** Proposes a principled method for quantifying "self" in AI systems through invariant subnetwork analysis. This contributes to foundational interpretability questions relevant to understanding autonomous agent behavior and potential emergence of persistent behavioral properties.
-
-**Technical Core:** Uses continual learning vs. constant-task controls to identify invariant neural subnetwork structure. Shows continual-learning robots develop significantly more stable invariant subnetworks (p<0.001), suggesting the "self" can be operationalized as the most persistent cognitive structure.
+**Relationship:** Uses Claude Code (Anthropic product) as the underlying agent, though no listed key researchers are authors.
 
 ---
 
-*Note: Seven of twenty papers in today's feed have direct relevance to AI safety, interpretability, and governance—a notably high concentration.*
+### 4. No Single Metric Tells the Whole Story: A Multi-Dimensional Evaluation Framework for Uncertainty Attributions
+
+**Link:** [arXiv:2603.24524](https://arxiv.org/abs/2603.24524)
+
+**The "So What?":** Reliable uncertainty quantification is essential for safe AI deployment. This paper advances interpretability by providing a systematic evaluation framework for uncertainty attribution methods, helping practitioners understand when and why models are uncertain.
+
+**Technical Core:** The authors align uncertainty attribution evaluation with the Co-12 XAI framework, implementing metrics for correctness, consistency, continuity, compactness, and a novel "conveyance" property. Experiments show gradient-based methods outperform perturbation-based approaches in consistency, while no single metric sufficiently captures attribution quality.
+
+**Relationship:** No direct affiliation with listed key researchers or organizations.
+
+---
+
+### 5. Anti-I2V: Safeguarding your photos from malicious image-to-video generation
+
+**Link:** [arXiv:2603.24570](https://arxiv.org/abs/2603.24570)
+
+**The "So What?":** As generative video models become more capable, protecting individuals from unauthorized deepfake creation is a growing safety concern. This work provides a technical defense mechanism against malicious use of image-to-video diffusion models.
+
+**Technical Core:** Anti-I2V introduces adversarial perturbations operating in L*a*b* and frequency domains to disrupt video diffusion models (including DiT architectures). By targeting layers capturing semantic features during denoising, the method degrades temporal coherence and generation fidelity, achieving state-of-the-art defense performance.
+
+**Relationship:** No direct affiliation with listed key researchers or organizations.
+
+---
+
+## Papers from Key Researchers/Organizations
+
+None identified in today's feed.
+
+---
+
+*Generated from arXiv feed dated 2026-03-26*
