@@ -1,33 +1,30 @@
 name: Daily AI Research Bot
 on:
-schedule:
-# 3:00 PM UTC is 8:00 AM Seattle (PDT)
-- cron: '0 15 * * *'
-workflow_dispatch: # This adds a "Run now" button for testing
+  schedule:
+    - cron: '0 15 * * *'
+  workflow_dispatch:
 
 permissions:
-contents: write # Allows Claude to save reports to your repo
+  contents: write
 
 jobs:
-research:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout Repository
-uses: actions/checkout@v4
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-- name: Run Claude Research
-uses: anthropics/claude-code-action@v1
-with:
-anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-# This tells Claude to look at your CLAUDE.md for instructions
-prompt: "Execute the Daily Tasks in CLAUDE.md and save the result in the reports/ folder."
+      - name: Run Claude Research
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: "Execute the Daily Tasks in CLAUDE.md and save the result in the reports/ folder."
 
-- name: Save Report to Repo
-run: |
-git config --local user.email "action@github.com"
-git config --local user.name "GitHub Action Bot"
-mkdir -p reports
-git add reports/*.md
-# Only commit if there are new changes to avoid errors
-git diff --quiet && git diff --staged --quiet || git commit -m "Add daily research report"
-git push
+      - name: Save Report to Repo
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+          mkdir -p reports
+          git add reports/*.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "Add daily research report"
+          git push
