@@ -15,7 +15,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          # This tells the bot to stay on the main branch
           ref: main
           fetch-depth: 0
 
@@ -37,3 +36,7 @@ jobs:
           branch: main
           commit_message: "Add daily research report"
           file_pattern: 'reports/*.md'
+          # This line below is the "Master Key" fix
+          repository: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
