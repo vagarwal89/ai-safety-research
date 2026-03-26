@@ -57,7 +57,7 @@ jobs:
           date = os.environ['TODAY']
 
           # Read the protocol from claude.md
-          with open('claude.md', 'r') as f:
+          with open('CLAUDE.md', 'r') as f:
               protocol = f.read()
 
           # Read today's raw arXiv XML
