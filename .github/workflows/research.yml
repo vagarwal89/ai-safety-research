@@ -36,5 +36,4 @@ jobs:
           branch: main
           commit_message: "Add daily research report"
           file_pattern: 'reports/*.md'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <--- ADD THIS LINE
+          token: ${{ secrets.GITHUB_TOKEN }}
