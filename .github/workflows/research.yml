@@ -36,7 +36,5 @@ jobs:
           branch: main
           commit_message: "Add daily research report"
           file_pattern: 'reports/*.md'
-          # This line below is the "Master Key" fix
-          repository: .
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <--- ADD THIS LINE
