@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/X0ecZDvus0l2g84vO+8zjuUtnkg</id>
+  <title>arXiv Query: search_query=cat:cs.AI AND cat:cs.LG&amp;id_list=&amp;start=0&amp;max_results=20</title>
+  <updated>2026-03-26T10:04:07Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=cat:cs.AI+AND+cat:cs.LG&amp;start=0&amp;max_results=20&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>20</opensearch:itemsPerPage>
+  <opensearch:totalResults>72286</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24580v1</id>
+    <title>Retrieval Improvements Do Not Guarantee Better Answers: A Study of RAG for AI Policy QA</title>
+    <updated>2026-03-25T17:54:39Z</updated>
+    <link href="https://arxiv.org/abs/2603.24580v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24580v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Retrieval-augmented generation (RAG) systems are increasingly used to analyze complex policy documents, but achieving sufficient reliability for expert usage remains challenging in domains characterized by dense legal language and evolving, overlapping regulatory frameworks. We study the application of RAG to AI governance and policy analysis using the AI Governance and Regulatory Archive (AGORA) corpus, a curated collection of 947 AI policy documents. Our system combines a ColBERT-based retriever fine-tuned with contrastive learning and a generator aligned to human preferences using Direct Preference Optimization (DPO). We construct synthetic queries and collect pairwise preferences to adapt the system to the policy domain. Through experiments evaluating retrieval quality, answer relevance, and faithfulness, we find that domain-specific fine-tuning improves retrieval metrics but does not consistently improve end-to-end question answering performance. In some cases, stronger retrieval counterintuitively leads to more confident hallucinations when relevant documents are absent from the corpus. These results highlight a key concern for those building policy-focused RAG systems: improvements to individual components do not necessarily translate to more reliable answers. Our findings provide practical insights for designing grounded question-answering systems over dynamic regulatory corpora.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T17:54:39Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Saahil Mathur</name>
+    </author>
+    <author>
+      <name>Ryan David Rittner</name>
+    </author>
+    <author>
+      <name>Vedant Ajit Thakur</name>
+    </author>
+    <author>
+      <name>Daniel Stuart Schiff</name>
+    </author>
+    <author>
+      <name>Tunazzina Islam</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24533v1</id>
+    <title>UI-Voyager: A Self-Evolving GUI Agent Learning via Failed Experience</title>
+    <updated>2026-03-25T17:10:29Z</updated>
+    <link href="https://arxiv.org/abs/2603.24533v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24533v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous mobile GUI agents have attracted increasing attention along with the advancement of Multimodal Large Language Models (MLLMs). However, existing methods still suffer from inefficient learning from failed trajectories and ambiguous credit assignment under sparse rewards for long-horizon GUI tasks. To that end, we propose UI-Voyager, a novel two-stage self-evolving mobile GUI agent. In the first stage, we employ Rejection Fine-Tuning (RFT), which enables the continuous co-evolution of data and models in a fully autonomous loop. The second stage introduces Group Relative Self-Distillation (GRSD), which identifies critical fork points in group rollouts and constructs dense step-level supervision from successful trajectories to correct failed ones. Extensive experiments on AndroidWorld show that our 4B model achieves an 81.0% Pass@1 success rate, outperforming numerous recent baselines and exceeding human-level performance. Ablation and case studies further verify the effectiveness of GRSD. Our method represents a significant leap toward efficient, self-evolving, and high-performance mobile GUI automation without expensive manual data annotation.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T17:10:29Z</published>
+    <arxiv:comment>Code and models are available at https://github.com/ui-voyager/UI-Voyager</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zichuan Lin</name>
+    </author>
+    <author>
+      <name>Feiyu Liu</name>
+    </author>
+    <author>
+      <name>Yijun Yang</name>
+    </author>
+    <author>
+      <name>Jiafei Lyu</name>
+    </author>
+    <author>
+      <name>Yiming Gao</name>
+    </author>
+    <author>
+      <name>Yicheng Liu</name>
+    </author>
+    <author>
+      <name>Zhicong Lu</name>
+    </author>
+    <author>
+      <name>Yangbin Yu</name>
+    </author>
+    <author>
+      <name>Mingyu Yang</name>
+    </author>
+    <author>
+      <name>Junyou Li</name>
+    </author>
+    <author>
+      <name>Deheng Ye</name>
+    </author>
+    <author>
+      <name>Jie Jiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24524v1</id>
+    <title>No Single Metric Tells the Whole Story: A Multi-Dimensional Evaluation Framework for Uncertainty Attributions</title>
+    <updated>2026-03-25T17:02:13Z</updated>
+    <link href="https://arxiv.org/abs/2603.24524v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24524v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Research on explainable AI (XAI) has frequently focused on explaining model predictions. More recently, methods have been proposed to explain prediction uncertainty by attributing it to input features (uncertainty attributions). However, the evaluation of these methods remains inconsistent as studies rely on heterogeneous proxy tasks and metrics, hindering comparability. We address this by aligning uncertainty attributions with the well-established Co-12 framework for XAI evaluation. We propose concrete implementations for the correctness, consistency, continuity, and compactness properties. Additionally, we introduce conveyance, a property tailored to uncertainty attributions that evaluates whether controlled increases in epistemic uncertainty reliably propagate to feature-level attributions. We demonstrate our evaluation framework with eight metrics across combinations of uncertainty quantification and feature attribution methods on tabular and image data. Our experiments show that gradient-based methods consistently outperform perturbation-based approaches in consistency and conveyance, while Monte-Carlo dropconnect outperforms Monte-Carlo dropout in most metrics. Although most metrics rank the methods consistently across samples, inter-method agreement remains low. This suggests no single metric sufficiently evaluates uncertainty attribution quality. The proposed evaluation framework contributes to the body of knowledge by establishing a foundation for systematic comparison and development of uncertainty attribution methods.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T17:02:13Z</published>
+    <arxiv:comment>Accepted at the Fourth World Conference on Explainable Artificial Intelligence, xAI 2026, Fortaleza, Brazil, July 1-3, 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Emily Schiller</name>
+    </author>
+    <author>
+      <name>Teodor Chiaburu</name>
+    </author>
+    <author>
+      <name>Marco Zullich</name>
+    </author>
+    <author>
+      <name>Luca Longo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24511v1</id>
+    <title>Claudini: Autoresearch Discovers State-of-the-Art Adversarial Attack Algorithms for LLMs</title>
+    <updated>2026-03-25T16:50:56Z</updated>
+    <link href="https://arxiv.org/abs/2603.24511v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24511v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LLM agents like Claude Code can not only write code but also be used for autonomous AI research and engineering \citep{rank2026posttrainbench, novikov2025alphaevolve}. We show that an \emph{autoresearch}-style pipeline \citep{karpathy2026autoresearch} powered by Claude Code discovers novel white-box adversarial attack \textit{algorithms} that \textbf{significantly outperform all existing (30+) methods} in jailbreaking and prompt injection evaluations.
+  Starting from existing attack implementations, such as GCG~\citep{zou2023universal}, the agent iterates to produce new algorithms achieving up to 40\% attack success rate on CBRN queries against GPT-OSS-Safeguard-20B, compared to $\leq$10\% for existing algorithms (\Cref{fig:teaser}, left).
+  The discovered algorithms generalize: attacks optimized on surrogate models transfer directly to held-out models, achieving \textbf{100\% ASR against Meta-SecAlign-70B} \citep{chen2025secalign} versus 56\% for the best baseline (\Cref{fig:teaser}, middle). Extending the findings of~\cite{carlini2025autoadvexbench}, our results are an early demonstration that incremental safety and security research can be automated using LLM agents. White-box adversarial red-teaming is particularly well-suited for this: existing methods provide strong starting points, and the optimization objective yields dense, quantitative feedback. We release all discovered attacks alongside baseline implementations and evaluation code at https://github.com/romovpa/claudini.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T16:50:56Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alexander Panfilov</name>
+    </author>
+    <author>
+      <name>Peter Romov</name>
+    </author>
+    <author>
+      <name>Igor Shilov</name>
+    </author>
+    <author>
+      <name>Yves-Alexandre de Montjoye</name>
+    </author>
+    <author>
+      <name>Jonas Geiping</name>
+    </author>
+    <author>
+      <name>Maksym Andriushchenko</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24481v1</id>
+    <title>Multi-Agent Reasoning with Consistency Verification Improves Uncertainty Calibration in Medical MCQA</title>
+    <updated>2026-03-25T16:22:53Z</updated>
+    <link href="https://arxiv.org/abs/2603.24481v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24481v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Miscalibrated confidence scores are a practical obstacle to deploying AI in clinical settings. A model that is always overconfident offers no useful signal for deferral. We present a multi-agent framework that combines domain-specific specialist agents with Two-Phase Verification and S-Score Weighted Fusion to improve both calibration and discrimination in medical multiple-choice question answering. Four specialist agents (respiratory, cardiology, neurology, gastroenterology) generate independent diagnoses using Qwen2.5-7B-Instruct. Each diagnosis is then subjected to a two-phase self-verification process that measures internal consistency and produces a Specialist Confidence Score (S-score). The S-scores drive a weighted fusion strategy that selects the final answer and calibrates the reported confidence. We evaluate across four experimental settings, covering 100-question and 250-question high-disagreement subsets of both MedQA-USMLE and MedMCQA. Calibration improvement is the central finding, with ECE reduced by 49-74% across all four settings, including the harder MedMCQA benchmark where these gains persist even when absolute accuracy is constrained by knowledge-intensive recall demands. On MedQA-250, the full system achieves ECE = 0.091 (74.4% reduction over the single-specialist baseline) and AUROC = 0.630 (+0.056) at 59.2% accuracy. Ablation analysis identifies Two-Phase Verification as the primary calibration driver and multi-agent reasoning as the primary accuracy driver. These results establish that consistency-based verification produces more reliable uncertainty estimates across diverse medical question types, providing a practical confidence signal for deferral in safety-critical clinical AI applications.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T16:22:53Z</published>
+    <arxiv:comment>17 pages, 6 figures. Preprint under review</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>John Ray B. Martinez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24440v1</id>
+    <title>CUA-Suite: Massive Human-annotated Video Demonstrations for Computer-Use Agents</title>
+    <updated>2026-03-25T15:52:56Z</updated>
+    <link href="https://arxiv.org/abs/2603.24440v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24440v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Computer-use agents (CUAs) hold great promise for automating complex desktop workflows, yet progress toward general-purpose agents is bottlenecked by the scarcity of continuous, high-quality human demonstration videos. Recent work emphasizes that continuous video, not sparse screenshots, is the critical missing ingredient for scaling these agents. However, the largest existing open dataset, ScaleCUA, contains only 2 million screenshots, equating to less than 20 hours of video. To address this bottleneck, we introduce CUA-Suite, a large-scale ecosystem of expert video demonstrations and dense annotations for professional desktop computer-use agents. At its core is VideoCUA, which provides approximately 10,000 human-demonstrated tasks across 87 diverse applications with continuous 30 fps screen recordings, kinematic cursor traces, and multi-layerfed reasoning annotations, totaling approximately 55 hours and 6 million frames of expert video. Unlike sparse datasets that capture only final click coordinates, these continuous video streams preserve the full temporal dynamics of human interaction, forming a superset of information that can be losslessly transformed into the formats required by existing agent frameworks. CUA-Suite further provides two complementary resources: UI-Vision, a rigorous benchmark for evaluating grounding and planning capabilities in CUAs, and GroundCUA, a large-scale grounding dataset with 56K annotated screenshots and over 3.6 million UI element annotations. Preliminary evaluation reveals that current foundation action models struggle substantially with professional desktop applications (~60% task failure rate). Beyond evaluation, CUA-Suite's rich multimodal corpus supports emerging research directions including generalist screen parsing, continuous spatial control, video-based reward modeling, and visual world models. All data and models are publicly released.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T15:52:56Z</published>
+    <arxiv:comment>Project Page: https://cua-suite.github.io/</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiangru Jian</name>
+    </author>
+    <author>
+      <name>Shravan Nayak</name>
+    </author>
+    <author>
+      <name>Kevin Qinghong Lin</name>
+    </author>
+    <author>
+      <name>Aarash Feizi</name>
+    </author>
+    <author>
+      <name>Kaixin Li</name>
+    </author>
+    <author>
+      <name>Patrice Bechard</name>
+    </author>
+    <author>
+      <name>Spandana Gella</name>
+    </author>
+    <author>
+      <name>Sai Rajeswar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24436v1</id>
+    <title>Enes Causal Discovery</title>
+    <updated>2026-03-25T15:47:39Z</updated>
+    <link href="https://arxiv.org/abs/2603.24436v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24436v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Enes The proposed architecture is a mixture of experts, which allows for the model entities, such as the causal relationships, to be further parameterized. More specifically, an attempt is made to exploit a neural net as implementing neurons poses a great challenge for this dataset. To explain, a simple and fast Pearson coefficient linear model usually achieves good scores. An aggressive baseline that requires a really good model to overcome that is. Moreover, there are major limitations when it comes to causal discovery of observational data. Unlike the sachs one did not use interventions but only prior knowledge; the most prohibiting limitation is that of the data which is addressed. Thereafter, the method and the model are described and after that the results are presented.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T15:47:39Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Alexis Kafantaris</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24396v1</id>
+    <title>Exploring How Fair Model Representations Relate to Fair Recommendations</title>
+    <updated>2026-03-25T15:12:20Z</updated>
+    <link href="https://arxiv.org/abs/2603.24396v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24396v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>One of the many fairness definitions pursued in recent recommender system research targets mitigating demographic information encoded in model representations. Models optimized for this definition are typically evaluated on how well demographic attributes can be classified given model representations, with the (implicit) assumption that this measure accurately reflects \textit{recommendation parity}, i.e., how similar recommendations given to different users are. We challenge this assumption by comparing the amount of demographic information encoded in representations with various measures of how the recommendations differ. We propose two new approaches for measuring how well demographic information can be classified given ranked recommendations. Our results from extensive testing of multiple models on one real and multiple synthetically generated datasets indicate that optimizing for fair representations positively affects recommendation parity, but also that evaluation at the representation level is not a good proxy for measuring this effect when comparing models. We also provide extensive insight into how recommendation-level fairness metrics behave for various models by evaluating their performances on numerous generated datasets with different properties.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T15:12:20Z</published>
+    <arxiv:comment>17 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Bjørnar Vassøy</name>
+    </author>
+    <author>
+      <name>Benjamin Kille</name>
+    </author>
+    <author>
+      <name>Helge Langseth</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24382v1</id>
+    <title>MolEvolve: LLM-Guided Evolutionary Search for Interpretable Molecular Optimization</title>
+    <updated>2026-03-25T15:01:03Z</updated>
+    <link href="https://arxiv.org/abs/2603.24382v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24382v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite deep learning's success in chemistry, its impact is hindered by a lack of interpretability and an inability to resolve activity cliffs, where minor structural nuances trigger drastic property shifts. Current representation learning, bound by the similarity principle, often fails to capture these structural-activity discontinuities. To address this, we introduce MolEvolve, an evolutionary framework that reformulates molecular discovery as an autonomous, look-ahead planning problem. Unlike traditional methods that depend on human-engineered features or rigid prior knowledge, MolEvolve leverages a Large Language Model (LLM) to actively explore and evolve a library of executable chemical symbolic operations. By utilizing the LLM to cold start and an Monte Carlo Tree Search (MCTS) engine for test-time planning with external tools (e.g. RDKit), the system self-discovers optimal trajectories autonomously. This process evolves transparent reasoning chains that translate complex structural transformations into actionable, human-readable chemical insights. Experimental results demonstrate that MolEvolve's autonomous search not only evolves transparent, human-readable chemical insights, but also outperforms baselines in both property prediction and molecule optimization tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T15:01:03Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiangsen Chen</name>
+    </author>
+    <author>
+      <name>Ruilong Wu</name>
+    </author>
+    <author>
+      <name>Yanyan Lan</name>
+    </author>
+    <author>
+      <name>Ting Ma</name>
+    </author>
+    <author>
+      <name>Yang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24350v1</id>
+    <title>Evidence of an Emergent "Self" in Continual Robot Learning</title>
+    <updated>2026-03-25T14:27:32Z</updated>
+    <link href="https://arxiv.org/abs/2603.24350v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24350v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A key challenge to understanding self-awareness has been a principled way of quantifying whether an intelligent system has a concept of a "self," and if so how to differentiate the "self" from other cognitive structures. We propose that the "self" can be isolated by seeking the invariant portion of cognitive process that changes relatively little compared to more rapidly acquired cognitive knowledge and skills, because our self is the most persistent aspect of our experiences. We used this principle to analyze the cognitive structure of robots under two conditions: One robot learns a constant task, while a second robot is subjected to continual learning under variable tasks. We find that robots subjected to continual learning develop an invariant subnetwork that is significantly more stable (p &lt; 0.001) compared to the control. We suggest that this principle can offer a window into exploring selfhood in other cognitive AI systems.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T14:27:32Z</published>
+    <arxiv:comment>39 pages, 17 figures, includes supplementary materials</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Adidev Jhunjhunwala</name>
+    </author>
+    <author>
+      <name>Judah Goldfeder</name>
+    </author>
+    <author>
+      <name>Hod Lipson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24324v1</id>
+    <title>Large Language Model Guided Incentive Aware Reward Design for Cooperative Multi-Agent Reinforcement Learning</title>
+    <updated>2026-03-25T14:05:59Z</updated>
+    <link href="https://arxiv.org/abs/2603.24324v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24324v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Designing effective auxiliary rewards for cooperative multi-agent systems remains a precarious task; misaligned incentives risk inducing suboptimal coordination, especially where sparse task feedback fails to provide sufficient grounding. This study introduces an automated reward design framework that leverages large language models to synthesize executable reward programs from environment instrumentation. The procedure constrains candidate programs within a formal validity envelope and evaluates their efficacy by training policies from scratch under a fixed computational budget; selection depends exclusively on the sparse task return. The framework is evaluated across four distinct Overcooked-AI layouts characterized by varied corridor congestion, handoff dependencies, and structural asymmetries. Iterative search generations consistently yield superior task returns and delivery counts, with the most pronounced gains occurring in environments dominated by interaction bottlenecks. Diagnostic analysis of the synthesized shaping components indicates increased interdependence in action selection and improved signal alignment in coordination-intensive tasks. These results demonstrate that the search for objectivegrounded reward programs can mitigate the burden of manual engineering while producing shaping signals compatible with cooperative learning under finite budgets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T14:05:59Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Dogan Urgun</name>
+    </author>
+    <author>
+      <name>Gokhan Gungor</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24291v1</id>
+    <title>Cost-Sensitive Neighborhood Aggregation for Heterophilous Graphs: When Does Per-Edge Routing Help?</title>
+    <updated>2026-03-25T13:28:31Z</updated>
+    <link href="https://arxiv.org/abs/2603.24291v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24291v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent work distinguishes two heterophily regimes: adversarial, where cross-class edges dilute class signal and harm classification, and informative, where the heterophilous structure itself carries useful signal. We ask: when does per-edge message routing help, and when is a uniform spectral channel sufficient? To operationalize this question we introduce Cost-Sensitive Neighborhood Aggregation (CSNA), a GNN layer that computes pairwise distance in a learned projection and uses it to soft-route each message through concordant and discordant channels with independent transformations. Under a contextual stochastic block model we show that cost-sensitive weighting preserves class-discriminative signal where mean aggregation provably attenuates it, provided $w_+/w_- &gt; q/p$. On six benchmarks with uniform tuning, CSNA is competitive with state-of-the-art methods on adversarial-heterophily datasets (Texas, Wisconsin, Cornell, Actor) but underperforms on informative-heterophily datasets (Chameleon, Squirrel) -- precisely the regime where per-edge routing has no useful decomposition to exploit. The pattern is itself the finding: the cost function's ability to separate edge types serves as a diagnostic for the heterophily regime, revealing when fine-grained routing adds value over uniform channels and when it does not. Code is available at https://github.com/eyal-weiss/CSNA-public .</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T13:28:31Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Eyal Weiss</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24254v1</id>
+    <title>Embracing Heteroscedasticity for Probabilistic Time Series Forecasting</title>
+    <updated>2026-03-25T12:48:50Z</updated>
+    <link href="https://arxiv.org/abs/2603.24254v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24254v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Probabilistic time series forecasting (PTSF) aims to model the full predictive distribution of future observations, enabling both accurate forecasting and principled uncertainty quantification. A central requirement of PTSF is to embrace heteroscedasticity, as real-world time series exhibit time-varying conditional variances induced by nonstationary dynamics, regime changes, and evolving external conditions. However, most existing non-autoregressive generative approaches to PTSF, such as TimeVAE and $K^2$VAE, rely on MSE-based training objectives that implicitly impose a homoscedastic assumption, thereby fundamentally limiting their ability to model temporal heteroscedasticity. To address this limitation, we propose the Location-Scale Gaussian VAE (LSG-VAE), a simple but effective framework that explicitly parameterizes both the predictive mean and time-dependent variance through a location-scale likelihood formulation. This design enables LSG-VAE to faithfully capture heteroscedastic aleatoric uncertainty and introduces an adaptive attenuation mechanism that automatically down-weights highly volatile observations during training, leading to improved robustness in trend prediction. Extensive experiments on nine benchmark datasets demonstrate that LSG-VAE consistently outperforms fifteen strong generative baselines while maintaining high computational efficiency suitable for real-time deployment.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T12:48:50Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yijun Wang</name>
+    </author>
+    <author>
+      <name>Qiyuan Zhuang</name>
+    </author>
+    <author>
+      <name>Xiu-Shen Wei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24239v1</id>
+    <title>DVM: Real-Time Kernel Generation for Dynamic AI Models</title>
+    <updated>2026-03-25T12:24:33Z</updated>
+    <link href="https://arxiv.org/abs/2603.24239v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24239v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dynamism is common in AI computation, e.g., the dynamic tensor shapes and the dynamic control flows in models. Due to the long compilation time, existing runtime compilation damages the model efficiency, while the offline compilers either suffer from the long compilation time and device memory footprint to cover all the possible execution instances of a dynamic model, or sacrifice optimization opportunities for usability. In this paper, we rethink the feasibility of runtime compilation for dynamic models and identify that the key for it to work is to speed up the compilation or hide the compilation overhead. To do this, we propose a real-time compiler, DVM. In DVM, we design a runtime operator compiler based on a bytecode virtual machine to perform effective and efficient compilation for each dynamic operator instance given its input. Specifically, instead of compiling programs into machine code, we encode the operator program into bytecode on the CPU and decode the bytecode into virtual instructions for direct execution on the NPU. Based on the runtime operator compiler, we further propose an operator fuser, which performs symbol-deduction-based fusion on static graphs and runtime fusion on dynamic graphs. Both pattern- and stacking-based fusion are supported to increase fusion opportunities. Evaluation on operators, subgraphs, and models shows that, compared with TorchInductor, PyTorch-eager and MindSpore-graph-O0, we are up to 11.77$\times$ better in terms of the operator/model efficiency and up to 5 orders of magnitude faster in terms of the maximum compilation time.</summary>
+    <category term="cs.PL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T12:24:33Z</published>
+    <arxiv:primary_category term="cs.PL"/>
+    <author>
+      <name>Jingzhi Fang</name>
+    </author>
+    <author>
+      <name>Xiong Gao</name>
+    </author>
+    <author>
+      <name>Renwei Zhang</name>
+    </author>
+    <author>
+      <name>Zichun Ye</name>
+    </author>
+    <author>
+      <name>Lei Chen</name>
+    </author>
+    <author>
+      <name>Jie Zhao</name>
+    </author>
+    <author>
+      <name>Chengnuo Huang</name>
+    </author>
+    <author>
+      <name>Hui Xu</name>
+    </author>
+    <author>
+      <name>Xuefeng Jin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24213v1</id>
+    <title>Uncovering Memorization in Timeseries Imputation models: LBRM Membership Inference and its link to attribute Leakage</title>
+    <updated>2026-03-25T11:43:25Z</updated>
+    <link href="https://arxiv.org/abs/2603.24213v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24213v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep learning models for time series imputation are now essential in fields such as healthcare, the Internet of Things (IoT), and finance. However, their deployment raises critical privacy concerns. Beyond the well-known issue of unintended memorization, which has been extensively studied in generative models, we demonstrate that time series models are vulnerable to inference attacks in a black-box setting. In this work, we introduce a two-stage attack framework comprising: (1) a novel membership inference attack based on a reference model that improves detection accuracy, even for models robust to overfitting-based attacks, and (2) the first attribute inference attack that predicts sensitive characteristics of the training data for timeseries imputation model. We evaluate these attacks on attention-based and autoencoder architectures in two scenarios: models that are trained from scratch, and fine-tuned models where the adversary has access to the initial weights. Our experimental results demonstrate that the proposed membership attack retrieves a significant portion of the training data with a tpr@top25% score significantly higher than a naive attack baseline. We show that our membership attack also provides a good insight of whether attribute inference will work (with a precision of 90% instead of 78% in the genral case).</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T11:43:25Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Faiz Taleb</name>
+    </author>
+    <author>
+      <name>Ivan Gazeau</name>
+    </author>
+    <author>
+      <name>Maryline Laurent</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24202v1</id>
+    <title>A Deep Dive into Scaling RL for Code Generation with Synthetic Data and Curricula</title>
+    <updated>2026-03-25T11:23:26Z</updated>
+    <link href="https://arxiv.org/abs/2603.24202v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24202v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reinforcement learning (RL) has emerged as a powerful paradigm for improving large language models beyond supervised fine-tuning, yet sustaining performance gains at scale remains an open challenge, as data diversity and structure, rather than volume alone, become the limiting factor. We address this by introducing a scalable multi-turn synthetic data generation pipeline in which a teacher model iteratively refines problems based on in-context student performance summaries, producing structured difficulty progressions without any teacher fine-tuning. Compared to single-turn generation, this multi-turn approach substantially improves the yield of valid synthetic problems and naturally produces stepping stones, i.e. easier and harder variants of the same core task, that support curriculum-based training. We systematically study how task difficulty, curriculum scheduling, and environment diversity interact during RL training across the Llama3.1-8B Instruct and Qwen3-8B Base model families, with additional scaling experiments on Qwen2.5-32B. Our results show that synthetic augmentation consistently improves in-domain code and in most cases out-of-domain math performance, and we provide empirical insights into how curriculum design and data diversity jointly shape RL training dynamics.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T11:23:26Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Cansu Sancaktar</name>
+    </author>
+    <author>
+      <name>David Zhang</name>
+    </author>
+    <author>
+      <name>Gabriel Synnaeve</name>
+    </author>
+    <author>
+      <name>Taco Cohen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24132v1</id>
+    <title>MedAidDialog: A Multilingual Multi-Turn Medical Dialogue Dataset for Accessible Healthcare</title>
+    <updated>2026-03-25T09:51:44Z</updated>
+    <link href="https://arxiv.org/abs/2603.24132v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24132v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Conversational artificial intelligence has the potential to assist users in preliminary medical consultations, particularly in settings where access to healthcare professionals is limited. However, many existing medical dialogue systems operate in a single-turn question--answering paradigm or rely on template-based datasets, limiting conversational realism and multilingual applicability. In this work, we introduce MedAidDialog, a multilingual multi-turn medical dialogue dataset designed to simulate realistic physician--patient consultations. The dataset extends the MDDial corpus by generating synthetic consultations using large language models and further expands them into a parallel multilingual corpus covering seven languages: English, Hindi, Telugu, Tamil, Bengali, Marathi, and Arabic.
+  Building on this dataset, we develop MedAidLM, a conversational medical model trained using parameter-efficient fine-tuning on quantized small language models, enabling deployment without high-end computational infrastructure. Our framework additionally incorporates optional patient pre-context information (e.g., age, gender, allergies) to personalize the consultation process. Experimental results demonstrate that the proposed system can effectively perform symptom elicitation through multi-turn dialogue and generate diagnostic recommendations. We further conduct medical expert evaluation to assess the plausibility and coherence of the generated consultations.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T09:51:44Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shubham Kumar Nigam</name>
+    </author>
+    <author>
+      <name>Suparnojit Sarkar</name>
+    </author>
+    <author>
+      <name>Piyush Patel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24124v1</id>
+    <title>The Alignment Tax: Response Homogenization in Aligned LLMs and Its Implications for Uncertainty Estimation</title>
+    <updated>2026-03-25T09:35:15Z</updated>
+    <link href="https://arxiv.org/abs/2603.24124v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24124v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>RLHF-aligned language models exhibit response homogenization: on TruthfulQA (n=790), 40-79% of questions produce a single semantic cluster across 10 i.i.d. samples. On affected questions, sampling-based uncertainty methods have zero discriminative power (AUROC=0.500), while free token entropy retains signal (0.603). This alignment tax is task-dependent: on GSM8K (n=500), token entropy achieves 0.724 (Cohen's d=0.81).
+  A base-vs-instruct ablation confirms the causal role of alignment: the base model shows 1.0% single-cluster rate vs. 28.5% for the instruct model (p &lt; 10^{-6}). A training stage ablation (Base 0.0% -&gt; SFT 1.5% -&gt; DPO 4.0% SCR) localizes the cause to DPO, not SFT. Cross-family replication on four model families reveals alignment tax severity varies by family and scale. We validate across 22 experiments, 5 benchmarks, 4 model families, and 3 model scales (3B-14B), with Jaccard, embedding, and NLI-based baselines at three DeBERTa scales (all ~0.51 AUROC). Cross-embedder validation with two independent embedding families rules out coupling bias. Cross-dataset validation on WebQuestions (58.0% SCR) confirms generalization beyond TruthfulQA. The central finding -- response homogenization -- is implementation-independent and label-free. Motivated by this diagnosis, we explore a cheapest-first cascade (UCBD) over orthogonal uncertainty signals. Selective prediction raises GSM8K accuracy from 84.4% to 93.2% at 50% coverage; weakly dependent boundaries (|r| &lt;= 0.12) enable 57% cost savings.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T09:35:15Z</published>
+    <arxiv:comment>23 pages, 3 figures, 10 tables, 22 experiments across 5 benchmarks. Code: https://github.com/DigitLion/ucbd-experiment</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mingyi Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24101v1</id>
+    <title>KCLNet: Electrically Equivalence-Oriented Graph Representation Learning for Analog Circuits</title>
+    <updated>2026-03-25T09:06:19Z</updated>
+    <link href="https://arxiv.org/abs/2603.24101v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24101v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Digital circuits representation learning has made remarkable progress in the electronic design automation domain, effectively supporting critical tasks such as testability analysis and logic reasoning. However, representation learning for analog circuits remains challenging due to their continuous electrical characteristics compared to the discrete states of digital circuits. This paper presents a direct current (DC) electrically equivalent-oriented analog representation learning framework, named \textbf{KCLNet}. It comprises an asynchronous graph neural network structure with electrically-simulated message passing and a representation learning method inspired by Kirchhoff's Current Law (KCL). This method maintains the orderliness of the circuit embedding space by enforcing the equality of the sum of outgoing and incoming current embeddings at each depth, which significantly enhances the generalization ability of circuit embeddings. KCLNet offers a novel and effective solution for analog circuit representation learning with electrical constraints preserved. Experimental results demonstrate that our method achieves significant performance in a variety of downstream tasks, e.g., analog circuit classification, subcircuit detection, and circuit edit distance prediction.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T09:06:19Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Peng Xu</name>
+    </author>
+    <author>
+      <name>Yapeng Li</name>
+    </author>
+    <author>
+      <name>Tinghuan Chen</name>
+    </author>
+    <author>
+      <name>Tsung-Yi Ho</name>
+    </author>
+    <author>
+      <name>Bei Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24093v1</id>
+    <title>Towards Effective Experiential Learning: Dual Guidance for Utilization and Internalization</title>
+    <updated>2026-03-25T08:52:56Z</updated>
+    <link href="https://arxiv.org/abs/2603.24093v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24093v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, reinforcement learning~(RL) has become an important approach for improving the capabilities of large language models~(LLMs). In particular, reinforcement learning from verifiable rewards~(RLVR) has emerged as a promising paradigm for reasoning tasks. However, existing RL-based training still remains only a rough approximation to human learning. Human learners leverage both external and internal experience to guide exploration and gradually internalize useful trajectories into stable knowledge. Motivated by this gap, we ask: how can LLMs better utilize and internalize experience during RLVR training? To answer this question, we propose \textbf{D}ual \textbf{G}uidance \textbf{O}ptimization~(\textbf{DGO}), a unified framework that leverages \emph{external} and \emph{internal experience} to improve training effectiveness. Specifically, DGO first constructs an experience bank from previously explored trajectories. The policy then performs exploration under the joint guidance of the experience bank and the model's internal knowledge. The resulting trajectories are further used to refine the experience bank and optimize model parameters, forming a closed loop of experience utilization and internalization. Experiments show that DGO consistently outperforms baseline methods, suggesting that better utilization and internalization of experience lead to more effective reasoning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T08:52:56Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Fei Bai</name>
+    </author>
+    <author>
+      <name>Zhipeng Chen</name>
+    </author>
+    <author>
+      <name>Chuan Hao</name>
+    </author>
+    <author>
+      <name>Ming Yang</name>
+    </author>
+    <author>
+      <name>Ran Tao</name>
+    </author>
+    <author>
+      <name>Bryan Dai</name>
+    </author>
+    <author>
+      <name>Wayne Xin Zhao</name>
+    </author>
+    <author>
+      <name>Jian Yang</name>
+    </author>
+    <author>
+      <name>Hongteng Xu</name>
+    </author>
+  </entry>
+</feed>
