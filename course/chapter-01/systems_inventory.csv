@@ -1,0 +1,6 @@
+system,use_case,eu_ai_act_tier,personal_data,special_category_data,regulation_triggered,dpia_needed
+Llama 3 open-weight model,general-purpose text generation,limited,depends on deployment (prompts may contain PII),no,GDPR (if personal data in prompts); EU AI Act GPAI duties; California SB 53 transparency,yes - if deployed on personal data
+Hiring screening tool,screens CVs and ranks applicants,high,"names, CVs, employment history",possibly - inferred attributes,EU AI Act Art. 10/13/14/15/17; GDPR Art. 9/22/35; Colorado AI Act,yes
+Customer-service chatbot,answers support questions for an e-commerce site,limited,"names, order history, addresses",no,GDPR; EU AI Act transparency (Art. 52 - user must know it is AI),yes - if large-scale profiling
+Medical triage assistant,prioritises patients by symptoms,high,"health data, symptoms, medical history",yes - health data,GDPR Art. 9/35; EU AI Act high-risk (medical device rules); HIPAA if US health data,yes
+Movie recommender,suggests films based on watch history,minimal,watch history and viewing preferences,no,GDPR (minimisation, purpose limitation),no
