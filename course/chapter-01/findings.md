@@ -119,3 +119,98 @@ Article numbers are not portable between laws. GDPR Art. 10, 13, 15,
 and 17 mean different things from EU AI Act Art. 10, 13, 15, and 17.
 Always write the law name before the article number.
 
+## Exercise B: PII scan (Presidio)
+
+Ran pii_scan.py on the five sample texts. Presidio reported 18 entities.
+
+### 1. What did it find, by type?
+
+| Entity type    | Count |
+| -------------- | ----- |
+| DATE_TIME      | 5     |
+| LOCATION       | 5     |
+| PERSON         | 3     |
+| PHONE_NUMBER   | 2     |
+| URL            | 2     |
+| EMAIL_ADDRESS  | 1     |
+| TOTAL          | 18    |
+
+Most common: DATE_TIME and LOCATION, tied at 5 each.
+
+But 18 is not the real score. Four of the 18 are false positives, and
+one is the right text with the wrong label:
+
+- Sample 1: "example.com" and a fragment of the email address were
+  flagged as URL. They are parts of the email that was already
+  detected, not separate entities.
+- Sample 2: the ZIP code "98031" was flagged as DATE_TIME.
+- Sample 4: the confirmation code "AB-8842-KL" was flagged as
+  DATE_TIME.
+- Sample 5: "45-year-old" was flagged as DATE_TIME. The age was
+  detected, but as the wrong type.
+
+So the honest count is 13 clean hits out of 18 detections, 4 false
+positives, 1 misclassified. Detection is never perfect in either
+direction: it misses real identifiers and invents fake ones.
+
+### 2. What did it miss?
+
+Sample 5, item by item:
+
+- Nickname "Viv": MISSED. Not flagged as PERSON. Presidio only
+  recognises full names it has seen in training data. A nickname at
+  the start of a sentence looks like an ordinary word to it.
+- Indian phone "+91 98765 43210": CAUGHT. Presidio did get this one,
+  so the Indian format is not the problem. The exercise predicted a
+  miss here and the prediction was wrong. Record that.
+- Indirect identifier "the 45-year-old manager from Kent": MISSED as
+  an identifier. "45-year-old" was flagged as DATE_TIME, which is the
+  wrong type, and "manager" plus the combination were not flagged at
+  all. Age plus job plus city is a quasi-identifier: on its own each
+  piece is harmless, together they narrow a person down fast.
+- UPI id "viv.k@okhdfcbank": MISSED entirely. No entity fired. It
+  looks like an email address, but it has no dot in the domain, so
+  Presidio's email pattern does not match it.
+
+Misses in the other samples:
+
+- Sample 2: the house number "20123" in "20123 98th Avenue South".
+  Presidio caught the street and city as LOCATION but not the number,
+  so the address survives in pieces.
+- Sample 3: the employee ID "EMP-48210". No recogniser exists for it
+  by default.
+- Sample 4: the card ending "9317". Presidio's credit-card recogniser
+  needs a full valid card number, so a partial number slips through.
+  The confirmation code "AB-8842-KL" was detected but as DATE_TIME,
+  the wrong type, so it would also survive a scrub that only removes
+  detected identifiers.
+
+### 3. Why does the miss matter for a training-data pipeline?
+
+A scrubber that misses indirect identifiers gives a false sense of
+safety. After scrubbing, sample 5 looks clean: no name, no email, no
+address. But "Viv, the 45-year-old manager from Kent, UPI id
+viv.k@okhdfcbank" still identifies one person. Anyone who knows the
+team can pick him out from age plus role plus city, and the UPI id is
+a direct handle to his bank account.
+
+That gap between "looks clean" and "is clean" is the whole privacy
+story of the next chapters. If this text went into a training set:
+
+- The PII is now in the training data, which breaks GDPR
+  minimisation (Art. 5(1)(c)) and the EU AI Act data-governance duty
+  (Art. 10), because the data was supposed to be cleaned before
+  training.
+- The model can memorise it. Chapter 6 shows how extraction attacks
+  pull memorised names, numbers, and identifiers back out of a
+  trained model. A miss at the scrubbing stage becomes a leak at the
+  model stage.
+- The false positives cause damage in the other direction. Scrubbing
+  a ZIP code and a confirmation code because they look like dates
+  corrupts the data, and a model trained on corrupted data learns the
+  wrong patterns.
+
+Measurement lesson: the misses are the finding. A detector that
+reports "18 entities found" sounds thorough. Counting what it missed
+and what it invented is what tells you whether the pipeline is safe.
+
